@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoC - Portal do Calouro Completo</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        :root {
+            --primary-bg: #1E1E1E;
+            --accent-blue: #00E5FF;
+            --accent-indigo: #3F51B5;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0BEC5;
+            --shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212; 
+            color: var(--text-primary);
+            line-height: 1.5;
+            transition: background-color 0.8s ease; 
+        }
+
+        header {
+            background-color: rgba(30, 30, 30, 0.95);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo { font-weight: 700; font-size: 1.2rem; color: var(--accent-blue); text-transform: uppercase; }
+        nav ul { display: flex; gap: 0.8rem; list-style: none; }
+        nav a { font-weight: 400; font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; transition: 0.3s; }
+        nav a:hover { color: var(--accent-blue); }
+
+        .secao {
+            min-height: 100vh;
+            padding: 100px 1rem 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px; /* Bem estreito para focar no mobile-first */
+            width: 100%;
+            background-color: rgba(30, 30, 30, 0.7);
+            padding: 1.5rem; /* Padding reduzido para telas menores */
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+        }
+
+        h1 { font-size: 1.8rem; text-align: center; margin-bottom: 1rem; color: var(--text-primary); }
+        h2 { font-size: 1.4rem; text-align: center; margin-bottom: 1rem; color: var(--text-primary); }
+        h3 { font-size: 1.1rem; text-align: center; margin-bottom: 1rem; color: var(--accent-blue); }
+        p { color: var(--text-secondary); margin-bottom: 1.5rem; font-weight: 300; text-align: center; font-size: 0.9rem; }
+
+        /* --- BOTÃO RIPPLE --- */
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            display: block;
+            width: 100%; /* Ocupa a largura do container no celular */
+            max-width: 280px;
+            margin: 0.5rem auto 0;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-blue);
+            color: #121212;
+            font-weight: 700;
+            border-radius: 6px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .btn-primary:hover { background-color: #FFFFFF; }
+        .ripple {
+            position: absolute; background: rgba(0, 0, 0, 0.25); border-radius: 50%;
+            transform: scale(0); animation: ripple-effect 0.6s linear; pointer-events: none;
+        }
+        @keyframes ripple-effect { to { transform: scale(4); opacity: 0; } }
+
+        /* --- TABELA RESPONSIVA PARA CELULAR --- */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto; /* Scroll horizontal suave se faltar espaço */
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            text-align: left;
+        }
+        .styled-table th, .styled-table td { padding: 10px 8px; vertical-align: top; }
+        .styled-table th { background-color: var(--accent-indigo); color: #fff; font-weight: 700; font-size: 0.85rem; }
+        .styled-table tr { border-bottom: 1px solid rgba(255,255,255,0.08); transition: background-color 0.2s; }
+        .styled-table tr:hover { background-color: rgba(255,255,255,0.05); }
+
+        .tag-disciplina {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 3px;
+        }
+        .tag-impar { background-color: rgba(0, 229, 255, 0.15); color: var(--accent-blue); }
+        .tag-par { background-color: rgba(63, 81, 181, 0.3); color: #9FA8DA; }
+        .tag-trilha { background-color: rgba(76, 175, 80, 0.2); color: #81C784; }
+
+        .info-complementar {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--accent-blue);
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            font-size: 0.8rem;
+            text-align: left;
+        }
+        .info-complementar strong { color: var(--accent-blue); }
+
+        /* --- 2. INFOGRÁFICO (LINHA DO TEMPO) --- */
+        .timeline {
+            border-left: 2px solid var(--accent-blue);
+            padding-left: 15px;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -22px; top: 16px;
+            width: 10px; height: 10px; background: var(--accent-blue);
+            border-radius: 50%; box-shadow: 0 0 8px var(--accent-blue);
+        }
+        .timeline-item h4 { font-size: 0.95rem; margin-bottom: 0.3rem; color: var(--accent-blue); }
+        .timeline-item p { font-size: 0.8rem; text-align: left; margin-bottom: 0; }
+
+        /* --- 3. QUESTÕES INTERATIVAS (ACCORDION) --- */
+        .faq-item {
+            background: rgba(0, 0, 0, 0.3);
+            margin-bottom: 0.8rem;
+            border-radius: 6px;
+            overflow: hidden;
+            border-left: 3px solid var(--accent-indigo);
+        }
+        .faq-pergunta {
+            padding: 1rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+            user-select: none;
+        }
+        .faq-pergunta:hover { background: rgba(255,255,255,0.05); }
+        .faq-pergunta::after {
+            content: '+'; font-size: 1.2rem; color: var(--accent-blue); transition: 0.3s;
+            margin-left: 10px;
+        }
+        .faq-pergunta.ativa::after { content: '-'; transform: rotate(180deg); }
+        
+        .faq-resposta {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .faq-resposta p {
+            padding: 1rem; margin: 0; text-align: left; font-size: 0.8rem;
+        }
+
+        /* Ajustes extras para telas muito estreitas */
+        @media (max-width: 380px) {
+            header { padding: 0.8rem 0.5rem; }
+            .logo { font-size: 1rem; }
+            nav ul { gap: 0.5rem; }
+            nav a { font-size: 0.75rem; }
+            .container { padding: 1rem; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Calouro 5.0</div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#grade">Grade</a></li>
+                <li><a href="#jornada">As 6 Pistas</a></li>
+                <li><a href="#faq">Dúvidas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Tela 1: Boas Vindas -->
+    <section id="inicio" class="secao" data-bg="#121212">
+        <div class="container">
+            <h1>Portal do Calouro</h1>
+            <p>Seja bem-vindo(a) à <strong>Univesp</strong>! Você acaba de iniciar sua jornada no curso de <strong>Bacharelado em Inteligência Artificial</strong>, e este portal foi desenvolvido <strong>especialmente para você</strong>.</p>
+            <p style="margin-top: -1rem;">Transformamos as informações do seu <em>Manual do Ingressante</em> em um mapa interativo para guiar seus primeiros passos de forma direta e inovadora. Role para baixo e descubra tudo o que precisa para o seu sucesso acadêmico!</p>
+            <a href="#grade" class="btn-primary">Ver Grade do Curso</a>
+        </div>
+    </section>
+
+    <!-- Tela 2: Tabela Sênior (Grade Curricular Univesp IA) -->
+    <section id="grade" class="secao" data-bg="#1A237E">
+        <div class="container">
+            <h2>Grade Curricular</h2>
+            <p>Bacharelado em Inteligência Artificial - Matriz de Disciplinas</p>
+            
+            <div class="info-complementar">
+                <strong>Informações Importantes:</strong><br>
+                • <strong>Carga Horária Total:</strong> 3400 horas<br>
+                • <strong>Atividades Complementares (APP):</strong> 200 horas exigidas externamente à grade (50h/semestre a partir do 5º semestre).
+            </div>
+
+            <div class="table-wrapper">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Semestre</th>
+                            <th style="width: 75%;">Disciplinas / Período</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1º Sem.</strong></td>
+                            <td>
+                                <span class="tag-disciplina tag-impar">Bimestre Ímpar</span> Leitura e Produção de Texto; Pensamento Computacional.<br>
+                                <span class="tag-disciplina tag-par">Bimestre Par</span> Matemática Básica; Projetos e Métodos para a Prod. do Conhecimento.<br>
+                                <span class="tag-disciplina tag-trilha">Semestral (Trilha)</span> Inteligência Artificial na Prática Acadêmica e Profissional.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>2º Sem.</strong></td>
+                            <td>
+                                <span class="tag-disciplina tag-impar">Bimestre Ímpar</span> Fundamentos Matemáticos para Computação; Algoritmos e Prog. de Computadores I.<br>
+                                <span class="tag-disciplina tag-par">Bimestre Par</span> Sistemas Computacionais; Estruturas de Dados.<br>
+                                <span class="tag-disciplina tag-trilha">Semestral (Trilha)</span> Prática de Programação com IA.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>3º Sem.</strong></td>
+                            <td>
+                                <span class="tag-disciplina tag-impar">Bimestre Ímpar</span> Cálculo I; Fundamentos de Desenvolvimento de Software.<br>
+                                <span class="tag-disciplina tag-par">Bimestre Par</span> Programação Orientada a Objetos; Estatística Aplicada.<br>
+                                <span class="tag-disciplina tag-trilha">Semestral (Trilha)</span> Desenvolvimento de Aplicações com IA.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>4º Sem.</strong></td>
+                            <td>
+                                <span class="tag-disciplina tag-impar">Bimestre Ímpar</span> Banco de Dados; Inteligência Artificial Clássica e Probabilística.<br>
+                                <span class="tag-disciplina tag-par">Bimestre Par</span> Introdução a Ciência de Dados; Álgebra Linear.<br>
+                                <span class="tag-disciplina tag-trilha">Semestral (Trilha)</span> Projeto Integrador Extensionista I.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>5º Sem.</strong></td>
+                            <td>
+                                <span class="tag-disciplina tag-impar">Bimestre Ímpar</span> Engenharia de Software; Aprendizado de Máquinas.<br>
+                                <span class="tag-disciplina tag-par">Bimestre Par</span> Aprendizado Profundo; Infraestrutura para Sistemas de Software.<br>
+                                <span class="tag-disciplina tag-trilha">Semestral (Trilha)</span> Projeto Integrador Extensionista II.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>6º Sem.</strong></td>
+                            <td>
+                                <span class="tag-disciplina tag-impar">Bimestre Ímpar</span> Segurança da Informação; Engenharia de Infraestrutura para IA.<br>
+                                <span class="tag-disciplina tag-par">Bimestre Par</span> Visão Computacional; Projeto e Análise de Algoritmos.<br>
+                                <span class="tag-disciplina tag-trilha">Semestral (Trilha)</span> Projeto Integrador Extensionista III.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>7º Sem.</strong></td>
+                            <td>
+                                <span class="tag-disciplina tag-impar">Bimestre Ímpar</span> Eletiva I; Processamento de Linguagem Natural.<br>
+                                <span class="tag-disciplina tag-par">Bimestre Par</span> Desenvolvimento Multicamada; Eletiva II.<br>
+                                <span class="tag-disciplina tag-trilha">Semestral (Trilha)</span> Projeto Integrador Extensionista IV.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>8º Sem.</strong></td>
+                            <td>
+                                <span class="tag-disciplina tag-impar">Bimestre Ímpar</span> Eletiva III; IA centrada no Humano; Eng. de Sistemas de Aprendizado de Máquina.<br>
+                                <span class="tag-disciplina tag-par">Bimestre Par</span> Operações, Monitoramento e Gov. de Dados; Impactos da IA na Sociedade; Eletiva IV.<br>
+                                <span class="tag-disciplina tag-trilha">Semestral (Trilha)</span> Projeto Final de Curso.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <a href="#jornada" class="btn-primary">Ver as 6 Pistas</a>
+        </div>
+    </section>
+
+    <!-- Tela 3: Infográfico (Linha do Tempo - MEU CURSO EM 6 PISTAS) -->
+    <section id="jornada" class="secao" data-bg="#004D40">
+        <div class="container">
+            <h2>Meu Curso em 6 Pistas</h2>
+            <p>Siga as pistas para entender o funcionamento e a dinâmica do seu curso na UNIVESP.</p>
+            
+            <div class="timeline">
+                
+                <!-- Pista 1 -->
+                <div class="timeline-item">
+                    <h4>Pista 1: [Insira o Título da Pista 1]</h4>
+                    <p>[Insira o texto explicativo da Pista 1 aqui]</p>
+                </div>
+                
+                <!-- Pista 2 -->
+                <div class="timeline-item">
+                    <h4>Pista 2: [Insira o Título da Pista 2]</h4>
+                    <p>[Insira o texto explicativo da Pista 2 aqui]</p>
+                </div>
+                
+                <!-- Pista 3 -->
+                <div class="timeline-item">
+                    <h4>Pista 3: [Insira o Título da Pista 3]</h4>
+                    <p>[Insira o texto explicativo da Pista 3 aqui]</p>
+                </div>
+
+                <!-- Pista 4 -->
+                <div class="timeline-item">
+                    <h4>Pista 4: [Insira o Título da Pista 4]</h4>
+                    <p>[Insira o texto explicativo da Pista 4 aqui]</p>
+                </div>
+
+                <!-- Pista 5 -->
+                <div class="timeline-item">
+                    <h4>Pista 5: [Insira o Título da Pista 5]</h4>
+                    <p>[Insira o texto explicativo da Pista 5 aqui]</p>
+                </div>
+
+                <!-- Pista 6 -->
+                <div class="timeline-item">
+                    <h4>Pista 6: [Insira o Título da Pista 6]</h4>
+                    <p>[Insira o texto explicativo da Pista 6 aqui]</p>
+                </div>
+
+            </div>
+            <a href="#faq" class="btn-primary">Ver Dúvidas Frequentes</a>
+        </div>
+    </section>
+
+    <!-- Tela 4: Questões Interativas (FAQ) -->
+    <section id="faq" class="secao" data-bg="#263238">
+        <div class="container">
+            <h2>Dúvidas Frequentes (FAQ)</h2>
+            <p>Selecione uma dúvida abaixo para ler a resposta:</p>
+            
+            <!-- Pergunta 1 -->
+            <div class="faq-item">
+                <div class="faq-pergunta">1. [Insira a Pergunta 1 aqui]</div>
+                <div class="faq-resposta">
+                    <p>[Insira a Resposta 1 aqui]</p>
+                </div>
+            </div>
+
+            <!-- Pergunta 2 -->
+            <div class="faq-item">
+                <div class="faq-pergunta">2. [Insira a Pergunta 2 aqui]</div>
+                <div class="faq-resposta">
+                    <p>[Insira a Resposta 2 aqui]</p>
+                </div>
+            </div>
+
+            <!-- Pergunta 3 -->
+            <div class="faq-item">
+                <div class="faq-pergunta">3. [Insira a Pergunta 3 aqui]</div>
+                <div class="faq-resposta">
+                    <p>[Insira a Resposta 3 aqui]</p>
+                </div>
+            </div>
+
+            <!-- Pergunta 4 -->
+            <div class="faq-item">
+                <div class="faq-pergunta">4. [Insira a Pergunta 4 aqui]</div>
+                <div class="faq-resposta">
+                    <p>[Insira a Resposta 4 aqui]</p>
+                </div>
+            </div>
+
+            <!-- Pergunta 5 -->
+            <div class="faq-item">
+                <div class="faq-pergunta">5. [Insira a Pergunta 5 aqui]</div>
+                <div class="faq-resposta">
+                    <p>[Insira a Resposta 5 aqui]</p>
+                </div>
+            </div>
+
+            <!-- Pergunta 6 -->
+            <div class="faq-item">
+                <div class="faq-pergunta">6. [Insira a Pergunta 6 aqui]</div>
+                <div class="faq-resposta">
+                    <p>[Insira a Resposta 6 aqui]</p>
+                </div>
+            </div>
+
+            <!-- Pergunta 7 -->
+            <div class="faq-item">
+                <div class="faq-pergunta">7. [Insira a Pergunta 7 aqui]</div>
+                <div class="faq-resposta">
+                    <p>[Insira a Resposta 7 aqui]</p>
+                </div>
+            </div>
+
+            <!-- Pergunta 8 -->
+            <div class="faq-item">
+                <div class="faq-pergunta">8. [Insira a Pergunta 8 aqui]</div>
+                <div class="faq-resposta">
+                    <p>[Insira a Resposta 8 aqui]</p>
+                </div>
+            </div>
+
+            <!-- Pergunta 9 -->
+            <div class="faq-item">
+                <div class="faq-pergunta">9. [Insira a Pergunta 9 aqui]</div>
+                <div class="faq-resposta">
+                    <p>[Insira a Resposta 9 aqui]</p>
+                </div>
+            </div>
+
+            <!-- Pergunta 10 -->
+            <div class="faq-item">
+                <div class="faq-pergunta">10. [Insira a Pergunta 10 aqui]</div>
+                <div class="faq-resposta">
+                    <p>[Insira a Resposta 10 aqui]</p>
+                </div>
+            </div>
+
+            <a href="#inicio" class="btn-primary" style="margin-top: 1.5rem;">Voltar ao Topo</a>
+        </div>
+    </section>
+
+    <script>
+        // 1. Efeito Ripple nos Botões
+        const botoes = document.querySelectorAll('.btn-primary');
+        botoes.forEach(botao => {
+            botao.addEventListener('click', function(e) {
+                let x = e.clientX - e.target.getBoundingClientRect().left;
+                let y = e.clientY - e.target.getBoundingClientRect().top;
+                let ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                this.appendChild(ripple);
+                setTimeout(() => { ripple.remove(); }, 600);
+            });
+        });
+
+        // 2. Mudança Dinâmica de Cor de Fundo no Scroll
+        const secoes = document.querySelectorAll('.secao');
+        window.addEventListener('scroll', () => {
+            secoes.forEach(secao => {
+                const topoSecao = secao.getBoundingClientRect().top;
+                if (topoSecao < window.innerHeight / 2 && topoSecao > -secao.offsetHeight / 2) {
+                    const novaCor = secao.getAttribute('data-bg');
+                    document.body.style.backgroundColor = novaCor;
+                }
+            });
+        });
+
+        // 3. Questões Interativas (Sanfona/Accordion)
+        const faqs = document.querySelectorAll('.faq-pergunta');
+        faqs.forEach(faq => {
+            faq.addEventListener('click', () => {
+                faq.classList.toggle('ativa');
+                const resposta = faq.nextElementSibling;
+                if(faq.classList.contains('ativa')) {
+                    resposta.style.maxHeight = resposta.scrollHeight + "px";
+                } else {
+                    resposta.style.maxHeight = 0;
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
