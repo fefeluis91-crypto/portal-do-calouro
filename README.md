@@ -23,11 +23,11 @@ Em vez de manuais estáticos, longos e de difícil navegação, criamos:
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias & Metodologia de Desenvolvimento
 
-*   **HTML5 & CSS3:** Estruturação semântica e estilização moderna com variáveis de cores personalizadas e efeitos de brilho em caixas de diálogo.
-*   **Design Responsivo:** Adaptado para telas de celulares, tablets e computadores.
-*   **Engenharia de Prompt / RAG:** Integração do assistente com foco em documentos específicos da instituição.
+*   **HTML5 & CSS3:** Estruturação semântica e estilização moderna com variáveis de cores personalizadas, efeitos de brilho neon e responsividade para dispositivos móveis.
+*   **CSS @media print:** Engenharia de estilo dedicada para conversão limpa de HTML para PDF direto no navegador.
+*   **Vibe Coding (Metodologia de Co-criação):** O projeto foi desenvolvido utilizando a metodologia de *Vibe Coding*, unindo a visão de produto, design e curadoria humana com a velocidade de desenvolvimento e refinamento de código de uma Inteligência Artificial parceira (Gemini). Essa sinergia permitiu prototipar, ajustar estilos em tempo real, testar e publicar a solução com máxima agilidade.
 
 ---
 
@@ -37,3 +37,11 @@ Em vez de manuais estáticos, longos e de difícil navegação, criamos:
 ├── index.html              # Código principal do Portal Web
 ├── versao-impressao.html   # HTML especial otimizado para gerar o PDF
 └── README.md               # Documentação do projeto (este arquivo)
+
+---
+
+## 👥 Equipe e Co-criação
+
+*   **[Luis/GitHub]** — Idealizador, Designer UX/UI, Piloto de Desenvolvimento e Engenharia de Prompt (Vibe Coding).
+*   **Gabi** — Produção de Conteúdo, Curadoria dos Textos e Estruturação do FAQ.
+*   **Gemini (IA)** — Copiloto de Código, responsável por gerar os componentes HTML/CSS sob demanda, auxiliar na lógica de navegação e formatação de impressão.
