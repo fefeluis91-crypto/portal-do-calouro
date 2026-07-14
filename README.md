@@ -4,13 +4,14 @@
 
 ---
 
-## 🌐 Sobre o Projeto
+## 🌐 Contexto Acadêmico & Sobre o Projeto
 
-O **Portal do Calouro** nasceu para resolver uma dor real: a sobrecarga de informações que os novos alunos enfrentam ao ingressar na universidade. Em vez de manuais longos e confusos, este projeto oferece uma experiência interativa, fluida e acessível de qualquer dispositivo.
+Este projeto foi desenvolvido como parte de um **Projeto Acadêmico para a UNIVESP (Universidade Virtual do Estado de São Paulo)**. 
 
-O projeto é composto por um ecossistema com duas pontes de navegação integradas:
+O objetivo principal é aplicar conceitos práticos de Engenharia de Software, UX/UI e Inteligência Artificial para resolver uma dor real da comunidade acadêmica: a sobrecarga de informações que os novos alunos enfrentam ao ingressar no ensino a distância (EAD). 
+
+Em vez de manuais estáticos, longos e de difícil navegação, criamos:
 1. **O Portal Web (Online):** Interface interativa contendo cronogramas, FAQs dinâmicos e um assistente virtual inteligente.
-2. **O Manual de Impressão (Offline/PDF):** Um layout HTML alternativo, otimizado especificamente para geração de PDF via navegador (sem bordas indesejadas e com aproveitamento total de página), permitindo o estudo offline.
 
 ---
 
@@ -18,7 +19,6 @@ O projeto é composto por um ecossistema com duas pontes de navegação integrad
 
 *   **🤖 Chatbot IA Integrado:** Um assistente virtual inteligente baseado no modelo *stateless* (estilo NotebookLM). Ele processa as dúvidas dos calouros em tempo real usando como base os documentos oficiais do curso.
     *   *Privacidade Garantida:* As conversas são tratadas de forma isolada por sessão do navegador, garantindo que nenhum usuário veja o histórico do outro e eliminando a necessidade de logins complexos.
-*   **📄 Design Otimizado para Impressão:** O arquivo `versao-impressao.html` utiliza CSS `@media print` customizado para zerar margens e forçar a renderização de fundos, permitindo que o usuário gere um PDF impecável com `Ctrl + P`.
 *   **🔄 Navegação Cíclica (UX/UI):** O portal web leva ao gerador de PDF e o PDF possui elementos gráficos interativos (como botões neon com indicadores visuais "👉") que trazem o usuário de volta para o ambiente online.
 
 ---

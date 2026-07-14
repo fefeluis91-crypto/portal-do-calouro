@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+    @page {
+        size: A4 portrait;
+        margin: 15mm;
+        @bottom-center {
+            content: counter(page);
+            color: #5c6b8c;
+            font-family: sans-serif;
+            font-size: 9pt;
+        }
+    }
+    body {
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        background-color: #0b132b;
+        color: #ffffff;
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+    }
+    h1 { color: #00f0ff; text-align: center; text-transform: uppercase; font-size: 22pt; margin-top: 10px;}
+    h2 { color: #00f0ff; font-size: 18pt; margin-top: 30px; border-bottom: 1px solid #1c2541; padding-bottom: 5px; text-transform: uppercase;}
+    h3 { color: #bd93f9; font-size: 14pt; margin-top: 20px;}
+    
+    .hero { text-align: center; margin-bottom: 30px; }
+    .hero p { font-size: 11pt; line-height: 1.6; color: #d1d9e6; margin-bottom: 15px;}
+    
+    .btn {
+        display: inline-block;
+        background-color: #00f0ff;
+        color: #0b132b;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 12px 25px;
+        border-radius: 25px;
+        text-transform: uppercase;
+        margin: 15px auto;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 240, 255, 0.3);
+    }
+    
+    .info-box {
+        background: rgba(0, 240, 255, 0.05);
+        border: 1px solid rgba(0, 240, 255, 0.2);
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .info-box p { margin: 5px 0; font-size: 10pt; color: #a4b3cf; }
+    
+    .important-info {
+        background: rgba(189, 147, 249, 0.1);
+        border-left: 4px solid #bd93f9;
+        padding: 15px;
+        border-radius: 0 8px 8px 0;
+        margin-bottom: 20px;
+        font-size: 10pt;
+        line-height: 1.5;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    th, td { padding: 12px; text-align: left; font-size: 9pt; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    th { background-color: #1c2541; color: #00f0ff; font-weight: bold; text-transform: uppercase; }
+    tr { page-break-inside: avoid; }
+    
+    .tag { font-weight: bold; font-size: 8pt; text-transform: uppercase; display: block; margin-bottom: 2px;}
+    .tag-impar { color: #00f0ff; }
+    .tag-par { color: #bd93f9; }
+    .tag-trilha { color: #50fa7b; }
+    .materia { margin-bottom: 10px; }
+    
+    .card-grid {
+        display: block;
+    }
+    .card {
+        background: rgba(255, 255, 255, 0.03);
+        border-left: 3px solid #00f0ff;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 0 8px 8px 0;
+        page-break-inside: avoid;
+    }
+    .card h4 { color: #00f0ff; margin: 0 0 8px 0; font-size: 12pt; }
+    .card p { color: #d1d9e6; font-size: 10pt; margin: 0; }
+    
+    .faq-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        page-break-inside: avoid;
+    }
+    .faq-card h4 { color: #bd93f9; margin: 0 0 5px 0; font-size: 11pt; }
+    .faq-card p { color: #a4b3cf; font-size: 10pt; margin: 0; }
+    
+    .text-center { text-align: center; }
+</style>
+</head>
+<body>
+
+    <div class="hero">
+        <h1>Portal do Calouro</h1>
+        <h3>Bacharelado em Inteligência Artificial</h3>
+        <p><strong>Seja bem-vindo(a) à Univesp!</strong> Você acaba de iniciar sua jornada no curso de Bacharelado em Inteligência Artificial, e este portal foi desenvolvido especialmente para você.</p>
+        <p>Transformamos as informações do seu Manual do Ingressante em um mapa interativo para guiar seus primeiros passos de forma direta e inovadora. Role para baixo e descubra tudo o que precisa para o seu sucesso acadêmico!</p>
+        
+        <a href="https://fefeluis91-crypto.github.io/portal-do-calouro/#grade" class="btn">Visite o portal</a>
+    </div>
+    
+    <!-- CAIXINHA DO CHATBOT COM A MÃOZINHA APONTANDO PARA O LADO CERTO -->
+    <div style="clear: both;">
+        <a href="https://fefeluis91-crypto.github.io/portal-do-calouro/" target="_blank" style="text-decoration: none; display: block;">
+            <div style="border: 2px solid #bd93f9; border-radius: 15px; padding: 15px; background-color: #121a35; width: 50%; float: right; margin-top: 10px; margin-bottom: 20px; box-shadow: 0 0 15px rgba(189,147,249,0.3); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <p style="color: #00f0ff; font-weight: bold; font-size: 10pt; text-align: center; margin: 0; line-height: 1.4; flex: 1;">
+                    🤖 Tire suas dúvidas direto com a nossa IA! Acesse o portal e teste o chatbot que ajuda o calouro a navegar no AVA e entender o curso.
+                </p>
+                <span style="font-size: 20pt; filter: drop-shadow(0px 0px 5px #bd93f9); transform: rotate(15deg);">👈</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="info-box">
+        <p>Este projeto foi desenvolvido sob a premissa da interatividade digital. Para avaliar a experiência completa e a usabilidade pensada para o aluno, é indispensável a navegação pelo portal online.</p>
+        <p>Você pode acessar a grade curricular completa, navegar de forma rápida e tirar suas dúvidas direto no nosso portal.</p>
+        <p>🌐 <strong>Clique no botão acima ou acesse: fefeluis91-crypto.github.io/portal-do-calouro/</strong></p>
+    </div>
+
+    <h2>Grade Curricular</h2>
+    <div class="important-info">
+        <strong>Informações Importantes:</strong><br>
+        • Carga Horária Total: 3400 horas<br>
+        • Atividades Complementares (APP): 200 horas exigidas externamente à grade (50h/semestre a partir do 5º semestre).
+    </div>
+
+    <table>
+        <tr>
+            <th width="12%">Semestre</th>
+            <th>Disciplinas / Período</th>
+        </tr>
+        <tr>
+            <td><strong>1º Sem.</strong></td>
+            <td>
+                <div class="materia"><span class="tag tag-impar">Bimestre Ímpar</span> Leitura e Produção de Texto; Pensamento Computacional.</div>
+                <div class="materia"><span class="tag tag-par">Bimestre Par</span> Matemática Básica; Projetos e Métodos para a Prod. do Conhecimento.</div>
+                <div class="materia"><span class="tag tag-trilha">Semestral (Trilha)</span> Inteligência Artificial na Prática Acadêmica e Profissional.</div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>2º Sem.</strong></td>
+            <td>
+                <div class="materia"><span class="tag tag-impar">Bimestre Ímpar</span> Fundamentos Matemáticos para Computação; Algoritmos e Prog. de Computadores I.</div>
+                <div class="materia"><span class="tag tag-par">Bimestre Par</span> Sistemas Computacionais; Estruturas de Dados.</div>
+                <div class="materia"><span class="tag tag-trilha">Semestral (Trilha)</span> Prática de Programação com IA.</div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>3º Sem.</strong></td>
+            <td>
+                <div class="materia"><span class="tag tag-impar">Bimestre Ímpar</span> Cálculo I; Fundamentos de Desenvolvimento de Software.</div>
+                <div class="materia"><span class="tag tag-par">Bimestre Par</span> Programação Orientada a Objetos; Estatística Aplicada.</div>
+                <div class="materia"><span class="tag tag-trilha">Semestral (Trilha)</span> Desenvolvimento de Aplicações com IA.</div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>4º Sem.</strong></td>
+            <td>
+                <div class="materia"><span class="tag tag-impar">Bimestre Ímpar</span> Banco de Dados; Inteligência Artificial Clássica e Probabilística.</div>
+                <div class="materia"><span class="tag tag-par">Bimestre Par</span> Introdução a Ciência de Dados; Álgebra Linear.</div>
+                <div class="materia"><span class="tag tag-trilha">Semestral (Trilha)</span> Projeto Integrador Extensionista I.</div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>5º Sem.</strong></td>
+            <td>
+                <div class="materia"><span class="tag tag-impar">Bimestre Ímpar</span> Engenharia de Software; Aprendizado de Máquinas.</div>
+                <div class="materia"><span class="tag tag-par">Bimestre Par</span> Aprendizado Profundo; Infraestrutura para Sistemas de Software.</div>
+                <div class="materia"><span class="tag tag-trilha">Semestral (Trilha)</span> Projeto Integrador Extensionista II.</div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>6º Sem.</strong></td>
+            <td>
+                <div class="materia"><span class="tag tag-impar">Bimestre Ímpar</span> Segurança da Informação; Engenharia de Infraestrutura para IA.</div>
+                <div class="materia"><span class="tag tag-par">Bimestre Par</span> Visão Computacional; Projeto e Análise de Algoritmos.</div>
+                <div class="materia"><span class="tag tag-trilha">Semestral (Trilha)</span> Projeto Integrador Extensionista III.</div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>7º Sem.</strong></td>
+            <td>
+                <div class="materia"><span class="tag tag-impar">Bimestre Ímpar</span> Eletiva I; Processamento de Linguagem Natural.</div>
+                <div class="materia"><span class="tag tag-par">Bimestre Par</span> Desenvolvimento Multicamada; Eletiva II.</div>
+                <div class="materia"><span class="tag tag-trilha">Semestral (Trilha)</span> Projeto Integrador Extensionista IV.</div>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>8º Sem.</strong></td>
+            <td>
+                <div class="materia"><span class="tag tag-impar">Bimestre Ímpar</span> Eletiva III; IA centrada no Humano; Eng. de Sistemas de Aprendizado de Máquina.</div>
+                <div class="materia"><span class="tag tag-par">Bimestre Par</span> Operações, Monitoramento e Gov. de Dados; Impactos da IA na Sociedade; Eletiva IV.</div>
+                <div class="materia"><span class="tag tag-trilha">Semestral (Trilha)</span> Projeto Final de Curso.</div>
+            </td>
+        </tr>
+    </table>
+
+     <!-- CAIXINHA DO CHATBOT COM A MÃOZINHA APONTANDO PARA O LADO CERTO -->
+    <div style="clear: both;">
+        <a href="https://fefeluis91-crypto.github.io/portal-do-calouro/" target="_blank" style="text-decoration: none; display: block;">
+            <div style="border: 2px solid #bd93f9; border-radius: 15px; padding: 15px; background-color: #121a35; width: 50%; float: right; margin-top: 10px; margin-bottom: 20px; box-shadow: 0 0 15px rgba(189,147,249,0.3); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <p style="color: #00f0ff; font-weight: bold; font-size: 10pt; text-align: center; margin: 0; line-height: 1.4; flex: 1;">
+                    🤖 Tire suas dúvidas direto com a nossa IA! Acesse o portal e teste o chatbot que ajuda o calouro a navegar no AVA e entender o curso.
+                </p>
+                <span style="font-size: 20pt; filter: drop-shadow(0px 0px 5px #bd93f9); transform: rotate(15deg);">👈</span>
+            </div>
+        </a>
+    </div>
+
+    <div style="page-break-before: always;"></div>
+
+    <h2>Meu Curso em 6 Pistas</h2>
+    <p style="text-align:center; color:#d1d9e6; margin-bottom:20px;">Siga as pistas para entender o funcionamento e a dinâmica do seu curso na UNIVESP.</p>
+    
+    <div class="card-grid">
+        <div class="card">
+            <h4>Pista 1: [Insira o Título da Pista 1]</h4>
+            <p>[Insira o texto explicativo da Pista 1 aqui]</p>
+        </div>
+        <div class="card">
+            <h4>Pista 2: [Insira o Título da Pista 2]</h4>
+            <p>[Insira o texto explicativo da Pista 2 aqui]</p>
+        </div>
+        <div class="card">
+            <h4>Pista 3: [Insira o Título da Pista 3]</h4>
+            <p>[Insira o texto explicativo da Pista 3 aqui]</p>
+        </div>
+        <div class="card">
+            <h4>Pista 4: [Insira o Título da Pista 4]</h4>
+            <p>[Insira o texto explicativo da Pista 4 aqui]</p>
+        </div>
+        <div class="card">
+            <h4>Pista 5: [Insira o Título da Pista 5]</h4>
+            <p>[Insira o texto explicativo da Pista 5 aqui]</p>
+        </div>
+        <div class="card">
+            <h4>Pista 6: [Insira o Título da Pista 6]</h4>
+            <p>[Insira o texto explicativo da Pista 6 aqui]</p>
+        </div>
+    </div>
+    
+    <div class="text-center">
+        <a href="https://fefeluis91-crypto.github.io/portal-do-calouro/#duvidas" class="btn" style="background-color: #bd93f9;">Ver Dúvidas Frequentes</a>
+    </div>
+
+    <h2>Dúvidas Frequentes (FAQ)</h2>
+    
+    <div class="faq-card">
+        <h4>Dúvida 1</h4>
+        <p>[Insira a Resposta 1 aqui]</p>
+    </div>
+    <div class="faq-card">
+        <h4>Dúvida 2</h4>
+        <p>[Insira a Resposta 2 aqui]</p>
+    </div>
+    <div class="faq-card">
+        <h4>Dúvida 3</h4>
+        <p>[Insira a Resposta 3 aqui]</p>
+    </div>
+    <div class="faq-card">
+        <h4>Dúvida 4</h4>
+        <p>[Insira a Resposta 4 aqui]</p>
+    </div>
+    <div class="faq-card">
+        <h4>Dúvida 5</h4>
+        <p>[Insira a Resposta 5 aqui]</p>
+    </div>
+    <div class="faq-card">
+        <h4>Dúvida 6</h4>
+        <p>[Insira a Resposta 6 aqui]</p>
+    </div>
+    <div class="faq-card">
+        <h4>Dúvida 7</h4>
+        <p>[Insira a Resposta 7 aqui]</p>
+    </div>
+    <div class="faq-card">
+        <h4>Dúvida 8</h4>
+        <p>[Insira a Resposta 8 aqui]</p>
+    </div>
+    <div class="faq-card">
+        <h4>Dúvida 9</h4>
+        <p>[Insira a Resposta 9 aqui]</p>
+    </div>
+    <div class="faq-card">
+        <h4>Dúvida 10</h4>
+        <p>[Insira a Resposta 10 aqui]</p>
+    </div>
+
+    <!-- CAIXINHA DO CHATBOT COM A MÃOZINHA APONTANDO PARA O LADO CERTO -->
+    <div style="clear: both;">
+        <a href="https://fefeluis91-crypto.github.io/portal-do-calouro/" target="_blank" style="text-decoration: none; display: block;">
+            <div style="border: 2px solid #bd93f9; border-radius: 15px; padding: 15px; background-color: #121a35; width: 50%; float: right; margin-top: 10px; margin-bottom: 20px; box-shadow: 0 0 15px rgba(189,147,249,0.3); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <p style="color: #00f0ff; font-weight: bold; font-size: 10pt; text-align: center; margin: 0; line-height: 1.4; flex: 1;">
+                    🤖 Tire suas dúvidas direto com a nossa IA! Acesse o portal e teste o chatbot que ajuda o calouro a navegar no AVA e entender o curso.
+                </p>
+                <span style="font-size: 20pt; filter: drop-shadow(0px 0px 5px #bd93f9); transform: rotate(15deg);">👈</span>
+            </div>
+        </a>
+    </div>
+
+</body>
+</html>
