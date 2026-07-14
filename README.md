@@ -37,6 +37,7 @@ Em vez de manuais estáticos, longos e de difícil navegação, criamos:
 ├── index.html              # Código principal do Portal Web
 ├── versao-impressao.html   # HTML especial otimizado para gerar o PDF
 └── README.md               # Documentação do projeto (este arquivo)
+```
 
 ---
 
@@ -45,3 +46,5 @@ Em vez de manuais estáticos, longos e de difícil navegação, criamos:
 *   **[Luis/GitHub]** — Idealizador, Designer UX/UI, Piloto de Desenvolvimento e Engenharia de Prompt (Vibe Coding).
 *   **Gabi** — Produção de Conteúdo, Curadoria dos Textos e Estruturação do FAQ.
 *   **Gemini (IA)** — Copiloto de Código, responsável por gerar os componentes HTML/CSS sob demanda, auxiliar na lógica de navegação e formatação de impressão.
+
+---
